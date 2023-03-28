@@ -17,7 +17,7 @@ def generate_states():
         lista[i][j] = int(lista[i][j])
     
     nodes_tuples = {}
-    available_nodes_names = ['acapulco','acayucan', 'agua prieta', 'aguascalientes', 'alvarado', 'atlacomulco', 'cabo san lucas', 'campeche', 'cancun', 'chetumal', 'chihuahua', 'chilpancingo', 'ciudad altamirano', 'ciudad de mexico', 'ciudad del carmen', 'ciudad obregon', 'ciudad victoria', 'colima', 'cordoba', 'cuernavaca', 'culiacan', 'durango', 'ensenada', 'felipe carrillo puerto', 'francisco escarcega', 'guadalajara', 'guanajuato', 'guaymas', 'hermosillo', 'hidalgo del parral', 'iguala', 'izucar de matamoros', 'janos', 'juarez', 'la paz', 'manzanillo', 'matamoros', 'mazatlan', 'merida', 'mexicalli', 'monclova', 'monterrey', 'morelia', 'nuevo laredo', 'oaxaca', 'ojinaga', 'pachuca de soto', 'piedras negras', 'pinotepa nacional', 'playa azul', 'puebla', 'puerto angel', 'queretaro', 'reynosa', 'salamanca', 'san felipe', 'san luis potosi', 'san quintin', 'santa ana', 'santa rosalia', 'santo domingo', 'soto la marina', 'tampico', 'tehuacan', 'tehuantepec', 'tepic', 'tijuana', 'tlaxcala', 'toluca de lerdo', 'topolobampo', 'torreon', 'tuxpan de rodriguez cano', 'tuxtla', 'valladolid', 'veracruz', 'villa hermosa', 'zacatecas', 'zihuatanejo']
+    available_nodes_names = ['ACAPULCO', 'ACAYUCAN', 'AGUA PRIETA', 'AGUASCALIENTES', 'ALVARADO', 'ATLACOMULCO', 'CABO SAN LUCAS', 'CAMPECHE', 'CANCUN', 'CHETUMAL', 'CHIHUAHUA', 'CHILPANCINGO', 'CIUDAD ALTAMIRANO', 'CIUDAD DE MEXICO', 'CIUDAD DEL CARMEN', 'CIUDAD OBREGON', 'CIUDAD VICTORIA', 'COLIMA', 'CORDOBA', 'CUERNAVACA', 'CULIACAN', 'DURANGO', 'ENSENADA', 'FELIPE CARRILLO PUERTO', 'FRANCISCO ESCARCEGA', 'GUADALAJARA', 'GUANAJUATO', 'GUAYMAS', 'HERMOSILLO', 'HIDALGO DEL PARRAL', 'IGUALA', 'IZUCAR DE MATAMOROS', 'JANOS', 'JUAREZ', 'LA PAZ', 'MANZANILLO', 'MATAMOROS', 'MAZATLAN', 'MERIDA', 'MEXICALI', 'MONCLOVA', 'MONTERREY', 'MORELIA', 'NUEVO LAREDO', 'OAXACA', 'OJINAGA', 'PACHUCA DE SOTO', 'PIEDRAS NEGRAS', 'PINOTEPA NACIONAL', 'PLAYA AZUL', 'PUEBLA', 'PUERTO ANGEL', 'QUERETARO', 'REYNOSA', 'SALAMANCA', 'SAN FELIPE', 'SAN LUIS POTOSI', 'SAN QUINTIN', 'SANTA ANA', 'SANTA ROSALIA', 'SANTO DOMINGO', 'SOTO LA MARINA', 'TAMPICO', 'TEHUACAN', 'TEHUANTEPEC', 'TEPIC', 'TIJUANA', 'TLAXCALA', 'TOLUCA DE LERDO', 'TOPOLOBAMPO', 'TORREON', 'TUXPAN DE RODRIGUEZ CANO', 'TUXTLA', 'VALLADOLID', 'VERACRUZ', 'VILLAHERMOSA', 'ZACATECAS', 'ZIHUATANEJO']
 
     for i in available_nodes_names:
         nodes_tuples[i] = []
@@ -33,5 +33,5 @@ def generate_states():
 tree = generate_states()
 # print(tree)
 
-result = greedy_best_first_search(tree, "cancun", "la paz")
-print (result)
+result = greedy_best_first_search(tree, "CANCUN", "LA PAZ")
+print (result) 

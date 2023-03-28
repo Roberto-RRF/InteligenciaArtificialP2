@@ -132,6 +132,10 @@ def euclidean_distance_between_cities(origin,goal):
     # calcula la distancia euclideana entre dos ciudades y regresa su valor redondeado
     return round(math.dist(origin,goal))
 
+def euclidean_distance_between_cities_string(origin,goal):
+    # calcula la distancia euclideana entre dos ciudades y regresa su valor redondeado
+    return round(math.dist(cities_coordinates[origin],cities_coordinates[goal]))
+
 ###############################
 ###############################
 ##### Funciones o Clases Principales #####
@@ -152,6 +156,8 @@ def calcular_heuristica_distancia_de_linea_recta(goal):
 
     # itera a traves de todas las ciudades disponibles en el grafo
     for city_origin, coordinate_origin in cities_coordinates.items():
+        print('Calculando la distancia de linea recta entre',city_origin,'y',goal)
+        break
         # obtiene la distancia euclideana de las dos ciudades correspondientes
         euclidean_distance = euclidean_distance_between_cities(coordinate_origin,coordinate_goal)
         # agrega al diccionario de heuristica la ciudad de origen y su valor de distancia de linea recta
@@ -179,4 +185,7 @@ def main():
     print('La heuristica para la ciudad objetivo {} es {}'.format(goal_city,hlsd))
 
 # se manda llamar la funcion principal
-main()
+
+hola = euclidean_distance_between_cities(cities_coordinates['CANCUN'],cities_coordinates['LA PAZ'])
+print(hola)
+# main()
