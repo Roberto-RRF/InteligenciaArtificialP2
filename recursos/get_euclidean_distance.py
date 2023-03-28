@@ -183,9 +183,3 @@ def main():
     
     # imprime en pantalla la heuristica correspondiente
     print('La heuristica para la ciudad objetivo {} es {}'.format(goal_city,hlsd))
-
-# se manda llamar la funcion principal
-
-hola = euclidean_distance_between_cities(cities_coordinates['CANCUN'],cities_coordinates['LA PAZ'])
-print(hola)
-# main()

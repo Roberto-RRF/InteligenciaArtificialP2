@@ -33,5 +33,3 @@ def generate_states():
 tree = generate_states()
 # print(tree)
 
-result = greedy_best_first_search(tree, "CANCUN", "LA PAZ")
-print (result) 

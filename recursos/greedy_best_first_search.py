@@ -1,17 +1,15 @@
 from queue import PriorityQueue
-# importamos get_euclidean_distance para calcular la distancia euclideana entre dos ciudades
 from get_euclidean_distance import euclidean_distance_between_cities_string
 
 
 def greedy_best_first_search(tree, start, goal):
-    frontier = PriorityQueue()
-    frontier.put(start, 0)
-    came_from = {}
-    came_from[start] = None
-    
-    while not frontier.empty():
-        current = frontier.get()
-        
+    frontier = [start]
+    came_from = {start: None}
+
+    while frontier:
+        frontier.sort(key=lambda x: euclidean_distance_between_cities_string(x, goal))
+        current = frontier.pop(0)
+
         if current == goal:
             path = []
             while current is not None:
@@ -19,12 +17,11 @@ def greedy_best_first_search(tree, start, goal):
                 current = came_from[current]
             path.reverse()
             return path
-        
-        for neighbor, distance in tree[current]:
+
+        for neighbor, distance in sorted(tree[current], key=lambda x: euclidean_distance_between_cities_string(x[0], goal)):
             if neighbor not in came_from:
-                priority = euclidean_distance_between_cities_string(neighbor, goal)
-                frontier.put(neighbor, priority)
+                frontier.append(neighbor)
                 came_from[neighbor] = current
-    
+
     return None
 
