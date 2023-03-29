@@ -1,4 +1,3 @@
-from queue import PriorityQueue
 from get_euclidean_distance import euclidean_distance_between_cities_string
 
 
