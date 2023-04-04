@@ -1,20 +1,18 @@
-from get_euclidean_distance import euclidean_distance_between_cities_string
+from HaversineDistance import *
 
 def a_star_algorithm(tree, start, goal):
     """
     Algoritmo de búsqueda A* para árboles.
-
     tree: diccionario con los nodos del árbol y sus conexiones
           Ejemplo: {'acapulco': [('chilpancingo', 140)], 'acayucan': [('alvarado', 110), ('tehuantepec', 80)], ...}
     start: nodo inicial
     goal: nodo objetivo
-
     Devuelve una lista de nodos en el camino óptimo desde el nodo inicial al objetivo.
     """
 
-    # Función de heurística (en este caso, la distancia en línea recta)
+    # Función de heurística (en este caso, la distancia de Haversine)
     def heuristic(nodo):
-        return euclidean_distance_between_cities_string(nodo, goal)
+        return HaversineDistanceBetweenCities(cities_coordinates[nodo], cities_coordinates[goal])
 
 
     # Inicialización de variables
