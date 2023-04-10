@@ -1,4 +1,4 @@
-from HaversineDistance import *
+from .HaversineDistance import *
 
 
 def greedy_best_first_search(tree, start, goal):
