@@ -23,7 +23,7 @@ Ejecucion del programa
         1) El nombre de una ciudad en Mexico que deseemos sea el destino
     
     Salidas:
-        1) Imprime en pantalla los valores calculados de la heuristica de distancia de linea recta
+        1) Imprime en pantalla los valores calculados de la heuristica de distancia de Haversine
 """
 
 
