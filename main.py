@@ -19,6 +19,7 @@ goal_state = 'CABO SAN LUCAS'
 
 # res1 = greedy_best_first_search(Bidireccional_tree, initial_state, goal_state)
 # res2 = greedy_best_first_search(tree, initial_state, goal_state)
-# print('Bidireccional_tree: ', res1) 
-prueba=beam_search(initial_state,goal_state,4,tree)
-print(prueba)
+# print('Bidireccional_tree: ', res1)
+
+res1 = steepest_ascent_hill_climbing(bidireccional_tree, initial_state, goal_state)
+print(res1)
