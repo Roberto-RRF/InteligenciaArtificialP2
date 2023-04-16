@@ -4,12 +4,10 @@ sys.path.append('./recursos')
 # Importamos la funcion greedy_best_first_search
 from recursos.greedy_best_first_search import greedy_best_first_search
 from recursos.a_star_search import a_star_algorithm
-from recursos.weighted_a_star_search import a_star_with_weights
-from recursos.steepest_ascent_hill_climbing import steepest_ascent_hill_climbing
-
+from recursos.steepest_ascent_hill_climbing import *
 # Importamos la funcion generate_states
 from recursos.generate_states import generate_states
-
+from recursos.beam_search import *
 
  
 bidireccional_tree, tree = generate_states()
