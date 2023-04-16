@@ -14,3 +14,5 @@ Genetic Algorithmsl
 Algoritmos pendientes de comentar:
 
 Steeping Hill Climbing search
+
+NO OLVIDAR HACER MENÚ
