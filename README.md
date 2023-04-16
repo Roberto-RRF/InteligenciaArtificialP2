@@ -10,3 +10,7 @@ Branch and Bound
 Simulated Annealing
 
 Genetic Algorithmsl
+
+Algoritmos pendientes de comentar:
+
+Steeping Hill Climbing search
