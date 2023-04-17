@@ -6,8 +6,12 @@ Algoritmos faltantes:
 
 Beam search (the original algorithm)
 
-Branch and Bound
-
 Simulated Annealing
 
 Genetic Algorithmsl
+
+Algoritmos pendientes de comentar:
+
+Steeping Hill Climbing search
+
+NO OLVIDAR HACER MENÚ
