@@ -1,11 +1,15 @@
 from get_euclidean_distance import euclidean_distance_between_cities_string
 
+import math
+
 def branch_and_bound(graph, start, goal):
     # Inicialización
     explored = set()
     queue = [(0, start)]
     best_cost = {start: 0}
     parent = {start: None}
+
+   
 
     # Ciclo principal
     while queue:
