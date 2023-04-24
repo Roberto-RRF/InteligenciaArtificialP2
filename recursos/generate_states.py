@@ -37,3 +37,5 @@ def generate_states():
 
 
     return bidireccional_tree, direccional_tree
+arbol_bi,arbol=generate_states()
+print(arbol)
