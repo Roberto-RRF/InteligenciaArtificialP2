@@ -12,7 +12,7 @@ Proyecto segundo parcial inteligencia artificial
 6. Stochastic hill climbing Listo
 7. Simulated annealing
 8. Genetic algorithms
-9. Best-search
+9. Best-search Listo
 10. Branch and bound Listo
 
 
