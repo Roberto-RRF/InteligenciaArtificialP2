@@ -1,6 +1,34 @@
+"""
+Universidad Panamericana
+Inteligencia Artificial
+Integrantes del equipo:
+    Felipe de Jesús Hernández Pérez
+    Roberto Requejo Fernández
+    Sebastián Ruíz Sandoval Suárez
+Proyecto: Algoritmos Informados 
+
+Generación del archivo: 25 de abril de 2023
+Versión del código: 1.0.0
+
+Descripción
+Este algoritmo genera el árbol de búsqueda
+
+Ejecucion del programa
+        Opcion 1) Solo mandalo a ajecutar
+    
+    Entradas:
+        1) No requiere entradas
+    
+    Salidas:
+        1) Genera tanto un árbol de búsqueda normal como uno unidireccional
+"""
+#Dependencias
+#CSV libreria para leer archivos de tipo csv
 import csv
+#pandas es utilizada para crear dataframes con informacion del archivo csv
 import pandas as pds
 
+#Responsable: Sebastian Ruiz
 def generate_states():
 
     # Abrimos el archivo csv y guardamos cada fila en una lista

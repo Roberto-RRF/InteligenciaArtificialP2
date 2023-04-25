@@ -131,10 +131,10 @@ while 1==1:
                 print("Introduzca un valor válido (un número entero)")
         muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
         if muestraPasos=='Y' or muestraPasos=='y':
-            resultado = stochastic_hill_climbing(tree,initial_state,goal_state,k,True)
+            resultado = stochastic_hill_climbing(bidireccional_tree,initial_state,goal_state,k,True)
             print(resultado)
         else:
-            resultado = stochastic_hill_climbing(tree,initial_state,goal_state,k,False)
+            resultado = stochastic_hill_climbing(bidireccional_tree,initial_state,goal_state,k,False)
             print(resultado)
     if algoritmo=='7':
         print ("Usted ha seleccionado el algoritmo Simmulated annealing")
