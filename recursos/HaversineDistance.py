@@ -152,6 +152,12 @@ def HaversineDistanceBetweenCities(start,goal):
     #El programa realiza el cálculo de la distancia de Haversine y regresa el valor
     return round(math.fabs(((math.sin((lat2-lat1)/2))**2) + (math.cos(lat1)*math.cos(lat2)*((math.sin((long2-long1)/2))**2))*1000))
 
+#Responsable de la función: Felipe
+def HaversineDistanceBetweenCitiesString(start,goal):
+    #Función que realiza el cálculo de la distancia de Haversine, pero recibiendo como paramétros el nombre de las ciudades en lugar de
+    # arreglos de coordenadas
+    #Simplemente obtiene los elementos del diccionario de coordenadas (si existen) y manda a llamar a la función de la distancia de Haversine
+    return HaversineDistanceBetweenCities(cities_coordinates[start],cities_coordinates[goal])
 #Calcula la distancia de Haversine de todos los nodos del grafo con respecto al nodo objetivo,
 # los incluye en un diccionario y regresa el diccionario como salida del algoritmo
 # dicho diccionario representa la heurística que va a utilizar el programa al momento de su ejecución
