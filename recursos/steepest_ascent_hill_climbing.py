@@ -1,3 +1,29 @@
+"""
+Universidad Panamericana
+Inteligencia Artificial
+Integrantes del equipo:
+    Felipe de Jesús Hernández Pérez
+    Roberto Requejo Fernández
+    Sebastián Ruíz Sandoval Suárez
+Proyecto: Algoritmos Informados 
+
+Generación del archivo: 25 de abril de 2023
+Versión del código: 1.0.0
+
+Descripción
+Este algoritmo realiza la búsqueda informada steepest ascent hill climbing search
+
+Ejecucion del programa
+        Opcion 1) Dentro del main selecciona la opción correspondiente
+    
+    Entradas:
+        1) El arbol de busqueda, el nodo inicial y final, y la booleana para mostrar el proceso. 
+    
+    Salidas:
+        1) Regresa el camino seguido para encontrar la solución.
+"""
+
+
 # Definir la función principal que llama a la función de búsqueda Steepest Ascent Hill Climbing
 def steepest_ascent_hill_climbing(tree, start, end, showProcess=False):
     # Definir la función objetivo como encontrar la ruta más corta entre dos ciudades
@@ -50,5 +76,3 @@ def steepest_ascent_hill_climbing(tree, start, end, showProcess=False):
     # Ejecutar la búsqueda Steepest Ascent Hill Climbing y devolver la ruta más corta encontrada
     shortest = hill_climbing(start, end)
     return shortest_path(start, end)
-
-

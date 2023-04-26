@@ -6,14 +6,11 @@ import math
 import random
 
 tree = generate_full_conected_tree()
-print(tree)
+
 
 # Definir la función de costo
 def cost(origen, destino):
-  return HaversineDistanceBetweenCitiesString(origen, destino)
-
-
-         
+  return HaversineDistanceBetweenCitiesString(origen, destino)      
 
       
       
@@ -74,5 +71,9 @@ def simulated_annealing(origen, destino):
       # Enfriar la temperatura
       temperatura *= factor_enfriamiento
     return solucion_actual, costo_actual
+
+a,b = simulated_annealing('CANCUN', 'MERIDA')
+print(a)
+print(b)
 
 

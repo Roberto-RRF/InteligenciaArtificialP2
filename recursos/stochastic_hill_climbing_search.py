@@ -13,7 +13,7 @@ def calculate_distance(path, tree):
 # Definimos la función de búsqueda Stochastic Hill Climbing
 def stochastic_hill_climbing(tree, initial_state, goal_state, max_iterations=1000, showProcess=False):
 
-    current_state = initial_state
+    current_state = [initial_state]
     current_distance = calculate_distance(current_state, tree)
     for i in range(max_iterations):
         neighbors = []
