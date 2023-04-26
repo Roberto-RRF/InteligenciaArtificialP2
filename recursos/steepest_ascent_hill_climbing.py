@@ -1,5 +1,5 @@
 # Definir la función principal que llama a la función de búsqueda Steepest Ascent Hill Climbing
-def steepest_ascent_hill_climbing(tree, start, end):
+def steepest_ascent_hill_climbing(tree, start, end, showProcess=False):
     # Definir la función objetivo como encontrar la ruta más corta entre dos ciudades
     def shortest_path(start, end):
         visited = set()

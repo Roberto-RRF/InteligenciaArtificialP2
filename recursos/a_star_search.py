@@ -7,7 +7,7 @@ Integrantes del equipo:
     Sebastián Ruíz Sandoval Suárez
 Proyecto: Algoritmos Informados 
 
-Generación del archivo: 4 de abril de 2023
+Generación del archivo: 25 de abril de 2023
 Versión del código: 1.0.0
 
 Descripción
@@ -34,7 +34,7 @@ Ejecucion del programa
 
 from .HaversineDistance import *
 
-#Responsable del algoritmo: Roberto
+#Responsable del algoritmo: Roberto Requejo
 def a_star_algorithm(tree, start, goal, W=1, showProcess=False):
     """
     Algoritmo de búsqueda A* para árboles.

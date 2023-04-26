@@ -7,7 +7,7 @@ Integrantes del equipo:
     Sebastián Ruíz Sandoval Suárez
 Proyecto: Algoritmos Informados 
 
-Generación del archivo: 4 de abril de 2023
+Generación del archivo: 25 de abril de 2023
 Versión del código: 1.0.0
 
 Descripción
@@ -150,7 +150,7 @@ def HaversineDistanceBetweenCities(start,goal):
     long1=start[1]# long1 es el valor 1 del nodo origen
 
     #El programa realiza el cálculo de la distancia de Haversine y regresa el valor
-    return round(math.fabs(((math.sin((lat2-lat1)/2))**2) + (math.cos(lat1)*math.cos(lat2)*((math.sin((long2-long1)/2))**2))*1000))
+    return round(math.fabs(((math.sin((lat2-lat1)/2))**2) + (math.cos(lat1)*math.cos(lat2)*((math.sin((long2-long1)/2))**2))*100))
 
 #Responsable de la función: Felipe
 def HaversineDistanceBetweenCitiesString(start,goal):

@@ -7,7 +7,7 @@ Integrantes del equipo:
     Sebastián Ruíz Sandoval Suárez
 Proyecto: Algoritmos Informados 
 
-Generación del archivo: 9 de abril de 2023
+Generación del archivo: 25 de abril de 2023
 Versión del código: 1.0.0
 
 Descripción
@@ -33,8 +33,8 @@ from .generate_states import *
 #tree: Almacena el árbol direccionado generado por generate_states()
 unidirectional_tree, tree = generate_states()
 
-#Responsable del algoritmo: Felipe
-def beam_search(start, goal, k, tree, showProcess=False):
+#Responsable del algoritmo: Felipe Hernández
+def beam_search(tree,start, goal,k,showProcess=False):
     #Variables
     queue=[(start,0)]#queue: Lista de tuplas con los nombres de los nodos que se van a visitar y sus pesos dentro del grafo
     path=[]#path: Variable que almacenará el camino recorrido por el algoritmo, en caso de llegar al nodo objetivo

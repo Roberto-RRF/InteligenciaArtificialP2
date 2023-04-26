@@ -1,7 +1,36 @@
+"""
+Universidad Panamericana
+Inteligencia Artificial
+Integrantes del equipo:
+    Felipe de Jesús Hernández Pérez
+    Roberto Requejo Fernández
+    Sebastián Ruíz Sandoval Suárez
+Proyecto: Algoritmos Informados 
+
+Generación del archivo: 25 de abril de 2023
+Versión del código: 1.0.0
+
+Descripción
+Este algoritmo realiza la búsqueda informada branch and bound
+
+Ejecucion del programa
+        Opcion 1) Selecciona la opción ejecuta el archivo main.py y selecciona la opción correspondiente
+    
+    Entradas:
+        1) El grafo de búsqueda, el nodo inicial y final, y un booleano para método de entrada
+    
+    Salidas:
+        1) Regresa una lista con los nodos visitados que forman parte del camino
+"""
+
+
+#Dependencias
+#Utilizamos el archivo HarversinDistance para sacar la euristica de cada nodo.
 from .HaversineDistance import HaversineDistanceBetweenCitiesString
 
 import math
 
+#Responsable: Roberto Requejo
 def branch_and_bound(graph, start, goal, showProcess=False):
     # Inicialización
     explored = set()

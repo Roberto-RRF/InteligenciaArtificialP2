@@ -1,150 +1,59 @@
+"""
+Universidad Panamericana
+Inteligencia Artificial
+Integrantes del equipo:
+    Felipe de Jesús Hernández Pérez
+    Roberto Requejo Fernández
+    Sebastián Ruíz Sandoval Suárez
+Proyecto: Algoritmos Informados 
+
+Generación del archivo: 25 de abril de 2023
+Versión del código: 1.0.0
+
+Descripción
+Este programa funciona solicita al usuario dos ciudades cualesquiera de México y le permite realizar cualquier tipo de búsqueda informada para conectarlas.
+En adición a esto, el programa permite ver al usuario el procedimiento que el programa siguió para llegar a la solución
+
+Ejecucion del programa
+     Dentro de la terminal, simplemente ejecutar el programa   
+    Entradas:
+        Ninguna, pero dependiendo del algoritmo seleccionado, se le pueden solicitar diferentes tipos de datos para realizar la búsqueda
+    
+    Salidas:
+        1) Imprime en pantalla el resultado de la búsqueda informada realizada así como cada uno de los pasos  de la ejecución, en caso de haber querido verlos
+"""
+
 import sys
 import math
 import random
 sys.path.append('./recursos')
 
-# Importamos la funcion greedy_best_first_search
+# Dependencias
+#Importamos de los diferentes códigos generados en clase, sus funciones de búsqueda, para que el programa pudiera realizarlas correctamente
+#estos códigos van desde el greedy best first search, hasta el simulated annealing
 from recursos.greedy_best_first_search import greedy_best_first_search
 from recursos.a_star_search import a_star_algorithm
 from recursos.steepest_ascent_hill_climbing import steepest_ascent_hill_climbing
 from recursos.branch_and_bound import branch_and_bound
 from recursos.best_search import best_search
+from recursos.stochastic_hill_climbing_search import stochastic_hill_climbing
+from recursos.beam_search import beam_search
 
-
-# Importamos la funcion generate_states
+# En adición a esto, importamos el archivo generate states, que nos crea el árbol de búsqueda (tanto unidireccional como direccionado) que utilizaremos en la ejecución del programa
 from recursos.generate_states import generate_states
+
+#Variables globales
+#origen_valido y destino_valido sirven como banderas para verificar dentro del menú, que los nombres de los nodos introducidos para realizar la búsqueda están correctamente escritos
 origen_valido =False
 destino_valido=False
-
-
- 
+#bidirectional_tree y tree almacenan el arbol unidireccional y el arbol dirigido de búsqueda respectivamente
 bidireccional_tree, tree = generate_states()
-
-
-# Definimos el estado inicial y el estado final
-
-
-#Función Genetic Algorithm
-def genetic_algorithm(graph, population_size, num_generations, mutation_rate):
-    population = generate_initial_population(population_size, graph)
-    for generation in range(num_generations):
-        fitness_scores = [fitness_function(chromosome, graph) for chromosome in population]
-        parent1 , parent2 = select_parents(population)
-        offspring = generate_offspring(parent1 , parent2)
-        population = mutate_population(offspring, mutation_rate,graph)
-    best_chromosome = max(population, key=lambda chromosome: fitness_function(chromosome, graph))
-    return best_chromosome
-
-#Función generate_initial_population para realizar el algoritmo de Genetic Algorithm
-#Lo que hace esta función es generar una población de manera aleatoria, esta población es 
-# cada uno de los nodos del grafo, los cuales representan una posible solución del problema,
-# esta función toma cada nodo del grafo y los coloca de modo de un directorio para poder ver la 
-# mejor solución al problema
-def generate_initial_population(population_size, graph):
-    population = []
-    nodes = list(graph.keys())
-    for i in range(population_size):
-        chromosome = random.sample(nodes, len(nodes))
-        population.append(chromosome)
-    return population
-
-#Función de fitness_function para realizar el algoritmo de Genetic Algorithm
-"""Esta función hace la implemnetación de ver que tanta aplitud tiene cada nodo
- esto quiere decir que ve cuantos vecinos tiene cada uno de los nodos que se ecnuentran
- en el cromosoma, se busca maximizar los vecinos que son soluciones en el cromosoma"""
-def fitness_function(chromosome, graph):
-    fitness = 0
-    for node in graph:
-        for neighbor in graph[node]:
-            if neighbor in chromosome:
-                fitness += 1
-    return fitness
-
-#Función select_parents para realizar el algoritmo de Genetic Algorithm
-"""La función genera un cruce entre dos padres la cual lo hace de la siguiente manera,
- toma un candidato y lo que hace es que selecciona un nodo de manera aleatoria para poder 
- encontrar a un candidato con el mayor fitness, ya cuando tenga el candidato con mayor fitness
- ese lo toma como padre y este procedimiento lo hace 2 veces para tener los 2 padres y lo 
- agrega a la lista de mejores andidatos la cual se guarda en padres"""
-def select_parents(population):
-    parent1 = random.choice(population)
-    parent2 = random.choice(population)
-    while parent2 == parent1 and len(population) > 1:
-        parent2 = random.choice(population)
-    return parent1, parent2
-
-#Función generate_offspring para realizar el algoritmo de Genetic Algorithm
-"""Esta función lo que hace es que a partir de los 2 padres crea una desendencia 
-    lo hace a partir de una de las partes de cada uno de los padres para poder 
-    realizar esta desecendia y esto lo hace de la siguiente manera si un número 
-    aleatorio generado al azar es mayor que la tasa de cruce, se clona uno de los 
-    padres como el descendiente sin realizar cruce. Si el número aleatorio es menor 
-    o igual a la tasa de cruce, se selecciona un punto de cruce aleatorio entre 1 y 
-    la longitud del cromosoma menos 1. Luego, se combina la primera parte del primer 
-    padre con la segunda parte del segundo padre a partir del punto de cruce para 
-    formar el descendiente. """
-def generate_offspring(parent1, parent2):
-    if len(parent1) <= 1:  # verificación de longitud de parent1
-        return parent1
-    crossover_point = random.randrange(1, len(parent1))
-    child = parent1[:crossover_point] + parent2[crossover_point:]
-    if random.random() < mutation_rate:
-        mutate_population(child)
-    return child
-
-#Función mutate_population para realizar el algoritmo de Genetic Algorithm
-"""Esta función lo que hace es generar una mutación en los cromosomas, esto lo hace tomando
-    de forma aleatoria un nodo del cromosoma para poder realizar la mutación, esto se hace 
-    con las siguientes reglas, ya que la función itera a través de cada cromosoma en la población
-    y verifica si se debe aplicar una mutación. Si un número aleatorio generado al azar es menor 
-    o igual a la tasa de mutación (mutation_rate), se realiza la mutación. Se crea una copia del 
-    cromosoma original y se cambia un nodo aleatorio en el cromosoma por otro nodo elegido al azar 
-    del grafo, el cromosoma mutado se agrega a una lista de cromosomas mutados, que se devuelve al 
-    final de la función."""
-    
-def mutate_population(population, mutation_rate, graph):
-    mutated_population = []
-    for chromosome in population:
-        mutated_chromosome = list(chromosome)
-        for i in range(len(chromosome)):
-            if random.random() < mutation_rate:
-                mutated_chromosome[i] = random.choice(list(graph.keys()))
-        mutated_population.append(mutated_chromosome)
-    return mutated_population
-
-#Función de main para realizar el algoritmo de Genetic Algorithm
-"""Esta función lo que hace es que llama a la función de genetic_algorithm para poder realizar
-    el algoritmo de Genetic Algorithm, esta función lo que hace es que recibe los parámetros
-    de la función de genetic_algorithm y los imprime en pantalla para poder ver el resultado
-    de la solución al problema"""
-
-population_size = len(tree.keys())
-num_generations = 1000
-mutation_rate = 0.01
-best_chromosome = genetic_algorithm(bidireccional_tree, population_size, num_generations, mutation_rate)
-print('Best chromosome:', best_chromosome)
-print('Fitness:', fitness_function(best_chromosome, bidireccional_tree))
-
-
 print("Inteligencia Artificial")
 print("Proyecto Segundo Parcial")
 print("-Felipe de Jesús Hernández Pérez\n-Roberto Requejo Fernández\n-Sebastián Ruíz Sandoval Suárez")
-while 1==1:
-    print("Seleccione el algoritmo de búsqueda a ejecutar")
-    print("[1] greedy best first search")
-    print("[2] A star")
-    print("[3] A star con pesos")
-    print("[4] Beam Search")
-    print("[5] Steeping Hill Climbing")
-    print("[6] Stochastic Hill Climbing")
-    print("[7] Simmulated annealing")
-    print("[8] Best Search")
-    print("[9] Branch and bound")
-    print("Para salir, oprima cualquier otra tecla...")
-    algoritmo=input("Seleccione el algoritmo a ejecutar: ")
-    if algoritmo=='1':
-        print("Usted ha seleccionado el algoritmo greedy best first search")
-        while origen_valido==False:
+print("Introduzca los datos esenciales para la búsqueda:")
+#Se le solicitan los nodos de origen y destino al usuario, y hasta que no sean correctamente introducidos, no se le permite realizar ninguna búsqueda en el programa
+while origen_valido==False:
             initial_state=input("Introduzca la ciudad de origen de su búsqueda: ")
             initial_state=initial_state.upper()
             print("Ciudad origen: "+initial_state)
@@ -152,14 +61,32 @@ while 1==1:
                 origen_valido=True
             else:
                 print("Por favor, introduzca una ciudad válida, escrita completamente en mayúsculas y sin acentos")
-        while destino_valido==False:
-            goal_state=input("Introduzca la ciudad destino de su búsqueda: ")
-            goal_state=goal_state.upper()
-            print("Ciudad destino: "+goal_state)
-            if goal_state in tree:
-                destino_valido=True
-            else:
-                print("Por favor, introduzca una ciudad válida, escrita completamente en mayúsculas y sin acentos")
+while destino_valido==False:
+    goal_state=input("Introduzca la ciudad destino de su búsqueda: ")
+    goal_state=goal_state.upper()
+    print("Ciudad destino: "+goal_state)
+    if goal_state in tree:
+        destino_valido=True
+    else:
+        print("Por favor, introduzca una ciudad válida, escrita completamente en mayúsculas y sin acentos")
+#Una vez introducidos los nodos de la búsqueda, el usuario entra al menú de selección de búsqueda, este se va a repetir infinitamente hasta que el usuario decida salir del programa
+while 1==1:
+    print("Seleccione el algoritmo de búsqueda a ejecutar, si selecciona una opción inválida, regresará a este menú")
+    print("[1] greedy best first search")
+    print("[2] A star")
+    print("[3] A star con pesos")
+    print("[4] Beam Search")
+    print("[5] Steeping Hill Climbing")
+    print("[6] Stochastic Hill Climbing")
+    print("[7] Simmulated annealing")
+    print("[8] Best Search") 
+    print("[9] Branch and bound")
+    print("Para salir, oprima ESPACIO...")
+    algoritmo=input("Seleccione el algoritmo a ejecutar: ")
+#Dependiendo del algoritmo seleccionado se le podrán pedir o no datos adicionales, pero siempre se le solicitará al usuario si quiere ver o no el procedimiento paso a paso del algoritmo
+# de búsqueda elegido
+    if algoritmo=='1':
+        print("Usted ha seleccionado el algoritmo greedy best first search")
         muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
         if muestraPasos=='Y' or muestraPasos=='y':
             resultado = greedy_best_first_search(tree,initial_state,goal_state,True)
@@ -167,7 +94,100 @@ while 1==1:
         else:
             resultado = greedy_best_first_search(tree,initial_state,goal_state,False)
             print(resultado)
-        input()
-    else:
-        print("Si estás viendo esto, todavía no acabo de programar el menú")
+    if algoritmo=='2':
+        print("Usted ha seleccionado el algoritmo A star")
+        muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
+        if muestraPasos=='Y' or muestraPasos=='y':
+            resultado = a_star_algorithm(tree,initial_state,goal_state,1,True)
+            print(resultado)
+        else:
+            resultado = a_star_algorithm(tree,initial_state,goal_state,1,False)
+            print(resultado)
+    if algoritmo=='3':
+    #Si elige el algoritmo A* con pesos se le pedirá que asigne un valor para el coeficiente por el que se va a multiplicar la heurística
+    #El usuario no podrá seguir avanzando con el programa si no introduce un valor numérico mayor a 1
+         print("Usted ha seleccionado el algoritmo A star con pesos")
+         while True:
+            try:
+                k=float(input("Introduzca el valor de k: "))
+                if k>1:
+                    break
+                else:
+                    print("Introduzca un número mayor a 1")
+            except:
+                print("Introduzca un valor válido (un número mayor a 1)")
+         muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
+         if muestraPasos=='Y' or muestraPasos=='y':
+            resultado = a_star_algorithm(tree,initial_state,goal_state,k,True)
+            print(resultado)
+         else:
+            resultado =(tree,initial_state,goal_state,k,False)
+            print(resultado)
+    if algoritmo=='4':
+        print("Usted ha seleccionado el algoritmo beam search")
+        while True:
+    #Si el usuario selecciona el algoritmo beam search, no podrá avanzar hasta especificar un valor límite de anchura
+    #Si no introduce un número entero, no podrá avanzar en el programa
+            try:
+                k=int(input("Introduzca el valor de W (límite de anchura): "))
+                break
+            except:
+                print("Introduzca un valor válido (un número entero)")
+        muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
+        if muestraPasos=='Y' or muestraPasos=='y':
+            resultado = beam_search(tree,initial_state,goal_state,k,True)
+            print(resultado)
+        else:
+            resultado = beam_search(tree,initial_state,goal_state,k,False)
+            print(resultado)
+    if algoritmo=='5':
+        print("Usted ha seleccionado el algoritmo Steepest ascent Hill Climbing")
+        muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
+        if muestraPasos=='Y' or muestraPasos=='y':
+            resultado = steepest_ascent_hill_climbing(tree,initial_state,goal_state,True)
+            print(resultado)
+        else:
+            resultado = steepest_ascent_hill_climbing(tree,initial_state,goal_state,False)
+            print(resultado)
+    if algoritmo=='6':
+        print ("Usted ha seleccionado el algoritmo Stochastic Hill Climbing")
+        while True:
+        #Si el usuario selecciona el algoritmo beam search, no podrá avanzar hasta especificar un valor máximo de iteraciones
+        #Si no introduce un número entero, no podrá avanzar en el programa
+            try:
+                k=int(input("Introduzca el valor máximo de iteraciones: "))
+                break
+            except:
+                print("Introduzca un valor válido (un número entero)")
+        muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
+        if muestraPasos=='Y' or muestraPasos=='y':
+            resultado = stochastic_hill_climbing(bidireccional_tree,initial_state,goal_state,k,True)
+            print(resultado)
+        else:
+            resultado = stochastic_hill_climbing(bidireccional_tree,initial_state,goal_state,k,False)
+            print(resultado)
+    if algoritmo=='7':
+        print ("Usted ha seleccionado el algoritmo Simmulated annealing")
+    if algoritmo=='8':
+        print ("Usted ha seleccionado el algoritmo best search")
+        canmuestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
+        if muestraPasos=='Y' or muestraPasos=='y':
+            resultado = best_search(tree,initial_state,goal_state,True)
+            print(resultado)
+        else:
+            resultado = best_search(tree,initial_state,goal_state,False)
+            print(resultado)
+    if algoritmo=='9':
+        print ("Usted ha seleccionado el algoritmo branch and bound")
+        muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
+        if muestraPasos=='Y' or muestraPasos=='y':
+            resultado = branch_and_bound(tree,initial_state,goal_state,True)
+            print(resultado)
+        else:
+            resultado = branch_and_bound(tree,initial_state,goal_state,False)
+            print(resultado)
+    #Una vez el usuario introduce un espacio dentro del menú de opciones, el programa termina su ejecución
+    if algoritmo==' ':
+        print('gracias por usar el programa!!!')
         break
+    print("--------------------------------------------------------------------------------")
