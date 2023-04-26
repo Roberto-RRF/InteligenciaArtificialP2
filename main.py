@@ -38,6 +38,7 @@ from recursos.branch_and_bound import branch_and_bound
 from recursos.best_search import best_search
 from recursos.stochastic_hill_climbing_search import stochastic_hill_climbing
 from recursos.beam_search import beam_search
+from recursos.simulated_anealing import simulated_annealing
 
 # En adición a esto, importamos el archivo generate states, que nos crea el árbol de búsqueda (tanto unidireccional como direccionado) que utilizaremos en la ejecución del programa
 from recursos.generate_states import generate_states
@@ -161,13 +162,15 @@ while 1==1:
                 print("Introduzca un valor válido (un número entero)")
         muestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")
         if muestraPasos=='Y' or muestraPasos=='y':
-            resultado = stochastic_hill_climbing(bidireccional_tree,initial_state,goal_state,k,True)
+            resultado = stochastic_hill_climbing(initial_state,goal_state,bidireccional_tree,k,True)
             print(resultado)
         else:
-            resultado = stochastic_hill_climbing(bidireccional_tree,initial_state,goal_state,k,False)
+            resultado = stochastic_hill_climbing(initial_state,goal_state,bidireccional_tree,k,False)
             print(resultado)
     if algoritmo=='7':
         print ("Usted ha seleccionado el algoritmo Simmulated annealing")
+        result = simulated_annealing(initial_state,goal_state,bidireccional_tree)
+        print(result)
     if algoritmo=='8':
         print ("Usted ha seleccionado el algoritmo best search")
         canmuestraPasos=input("¿Desea ver la ejecución paso a paso de este algoritmo? [Y/N]")

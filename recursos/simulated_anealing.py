@@ -1,25 +1,43 @@
+"""
+Universidad Panamericana
+Inteligencia Artificial
+Integrantes del equipo:
+    Felipe de Jesús Hernández Pérez
+    Roberto Requejo Fernández
+    Sebastián Ruíz Sandoval Suárez
+Proyecto: Algoritmos Informados 
+
+Generación del archivo: 25 de abril de 2023
+Versión del código: 1.0.0
+
+Descripción
+Este algoritmo realiza la búsqueda informada simulated anealing search
+
+Ejecucion del programa
+        Opcion 1) Dentro del main selecciona la opción correspondiente
+    
+    Entradas:
+        1) El arbol de busqueda, el nodo inicial y final, y la booleana para mostrar el proceso. 
+    
+    Salidas:
+        1) Regresa el camino seguido para encontrar la solución.
+"""
+
 from HaversineDistance import *
-from generate_states import *
 import random 
 
 import math
 import random
 
-tree = generate_full_conected_tree()
-
-
 # Definir la función de costo
+# Responsable: Roberto Requejo Fernández
 def cost(origen, destino):
   return HaversineDistanceBetweenCitiesString(origen, destino)      
 
-      
-      
-     
-    
-  
 
 # Definir la función para generar un vecino aleatorio
-def generar_vecino(ciudad):
+# Responsable: Roberto Requejo Fernández
+def generar_vecino(ciudad, tree):
   vecinos = tree[ciudad]
   temp = []
   for i in vecinos:
@@ -29,7 +47,8 @@ def generar_vecino(ciudad):
   return vecino
 
 # Definir el algoritmo de Simulado Recocido
-def simulated_annealing(origen, destino):
+# Responsable: Roberto Requejo Fernández
+def simulated_annealing(origen, destino, tree):
   # Definir la temperatura inicial y final, y el factor de enfriamiento
   temperatura_inicial = 100
   temperatura_final = 0.1
@@ -45,7 +64,7 @@ def simulated_annealing(origen, destino):
   temperatura = temperatura_inicial
   while temperatura > temperatura_final:
     # Generar un vecino aleatorio
-    vecino = generar_vecino(solucion_actual[0])
+    vecino = generar_vecino(solucion_actual[0], tree)
     costo_vecino = cost(origen, vecino[0]) + cost(vecino[-1], destino)
     for i in range(len(vecino)-1):
       costo_vecino += cost(vecino[i], vecino[i+1])
@@ -71,9 +90,5 @@ def simulated_annealing(origen, destino):
       # Enfriar la temperatura
       temperatura *= factor_enfriamiento
     return solucion_actual, costo_actual
-
-a,b = simulated_annealing('CANCUN', 'MERIDA')
-print(a)
-print(b)
 
 
